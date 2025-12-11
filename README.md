@@ -30,41 +30,19 @@ This application is an autonomous agentic system that:
 
 Built for the DataSmith AI Gen AI position assignment.
 
+### Demo
+
+![Application Interface](frontend/demo.jpg)
+
 ---
 
 ## Architecture
 
-### System Workflow
+### System Architecture Diagram
 
-```
-User Input (Text/File)
-        |
-        v
-+------------------+
-| Input Processor  |  <- Extracts content from PDFs, Images, Audio
-+------------------+
-        |
-        v
-+------------------+
-| Intent Classifier|  <- Analyzes user message + extracted content
-+------------------+
-        |
-        v
-    [Decision]
-    /        \
-   /          \
-Ambiguous?   Clear Intent
-   |              |
-   v              v
-+----------+  +-------------+
-| Clarify  |  | Execute Task|
-| Node     |  | Node        |
-+----------+  +-------------+
-   |              |
-   v              v
-Ask Follow-up   Return Result
-Question
-```
+![Agentic AI Assistant Architecture](architecture.png)
+
+The architecture consists of five distinct layers:
 
 ### LangGraph Conditional Routing
 
@@ -99,6 +77,32 @@ AgentState {
   action_taken: str
 }
 ```
+
+### Architecture Layers
+
+**1. Input Layer (Blue)**
+- Multi-modal user inputs: Text, Images, PDFs, Audio, YouTube URLs
+- Handles various file formats and content types
+
+**2. Tool Layer (Purple)**
+- FastAPI server for request handling
+- Specialized extraction tools: OCR, PDF Parser, Whisper, YouTube API
+- Content preprocessing and normalization
+
+**3. Routing Layer (Red)**
+- LangGraph state management
+- Intent classification using Groq LLM
+- Autonomous decision-making logic
+
+**4. Execution Layer (Teal)**
+- Task-specific processors
+- Clarification handler for ambiguous inputs
+- Multiple specialized agents for different tasks
+
+**5. Output Layer (Green)**
+- Unified response formatting
+- Web UI for user interaction
+- Clean text-only outputs
 
 ---
 
@@ -547,9 +551,9 @@ This project was created for the DataSmith AI Gen AI position assignment.
 ## Author
 
 Praveen Agrawal
-- Email: Your email
-- GitHub: Your GitHub profile
-- LinkedIn: Your LinkedIn profile
+- Email: agrawalpraveen86539@gmail.com
+- GitHub: https://github.com/agrawalpraveen12
+- LinkedIn: https://www.linkedin.com/in/praveenagrawal220/
 
 ---
 

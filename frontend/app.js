@@ -7,7 +7,6 @@ const attachmentPreview = document.getElementById('attachment-preview');
 let currentFile = null;
 const API_URL = window.location.origin + "/api";
 
-
 function addMessage(content, isUser = false) {
     const msgDiv = document.createElement('div');
     msgDiv.classList.add('message', isUser ? 'user-message' : 'bot-message');
@@ -32,7 +31,7 @@ async function handleSendMessage() {
 
     let displayMsg = text;
     if (currentFile) {
-        displayMsg = (text ? text + '\\n' : '') + `[Attached: ${currentFile.name}]`;
+        displayMsg = (text ? text + "\n" : "") + `[Attached: ${currentFile.name}]`;
     }
     addMessage(displayMsg, true);
 
@@ -46,7 +45,7 @@ async function handleSendMessage() {
     const loadingDiv = document.createElement('div');
     loadingDiv.id = loadingId;
     loadingDiv.classList.add('message', 'bot-message');
-    loadingDiv.innerHTML = '<div class=\"message-content\">Thinking...</div>';
+    loadingDiv.innerHTML = '<div class="message-content">Thinking...</div>';
     chatArea.appendChild(loadingDiv);
     chatArea.scrollTop = chatArea.scrollHeight;
 
@@ -61,6 +60,7 @@ async function handleSendMessage() {
                 method: 'POST',
                 body: formData
             });
+
             const uploadResult = await uploadResp.json();
             uploadedFilePath = uploadResult.filepath;
         }
@@ -72,9 +72,7 @@ async function handleSendMessage() {
 
         const response = await fetch(`${API_URL}/chat`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
 
@@ -86,11 +84,9 @@ async function handleSendMessage() {
 
             if (data.extracted_content) {
                 const details = document.createElement('details');
-                details.style.marginTop = '10px';
-                details.style.color = '#888';
-                details.style.fontSize = '0.9em';
-                details.innerHTML = `<summary style="cursor:pointer">View Extracted Content</summary><pre style="white-space: pre-wrap; margin-top: 5px; background:#111; padding:10px; border-radius:5px;">${data.extracted_content}</pre>`;
-
+                details.innerHTML = `
+                    <summary>View Extracted Content</summary>
+                    <pre style="white-space: pre-wrap;">${data.extracted_content}</pre>`;
                 chatArea.lastElementChild.querySelector('.message-content').appendChild(details);
             }
         }
