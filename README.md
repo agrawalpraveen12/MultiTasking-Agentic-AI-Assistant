@@ -32,7 +32,10 @@ Built for the DataSmith AI Gen AI position assignment.
 
 ### Demo
 
-![Application Interface](frontend/demo.jpg)
+### Demo
+
+![Application Interface](frontend/demo.png)
+
 
 ---
 
